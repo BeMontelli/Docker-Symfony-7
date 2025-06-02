@@ -54,3 +54,10 @@ En cas de problèmes d'accès ou d'écriture :
 - ```docker-compose exec php chmod -R 777 var/log```
 
 > ⚠️ À utiliser uniquement en environnement de développement.
+
+---
+
+## 🛠️ Dépannage : volume `db_data`
+
+- ```docker volume ls```
+- ```docker volume rm docker-sf_db_data```
