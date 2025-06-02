@@ -11,10 +11,22 @@ services:
     ports:
       - "9000:9000"
     depends_on:
-      - mariadb
-  mariadb:
-    image: mariadb:latest
-    container_name: mariadb
+      - mysql
+  #mariadb:
+  #  image: mariadb:latest
+  #  container_name: mariadb
+  #  environment:
+  #    MYSQL_ROOT_PASSWORD: root
+  #    MYSQL_DATABASE: symfony
+  #    MYSQL_USER: symfony
+  #    MYSQL_PASSWORD: symfony
+  #  ports:
+  #    - "3307:3306" # Le port local est maintenant 3307
+  #  volumes:
+  #    - db_data:/var/lib/mysql
+  mysql:
+    image: mysql:8.4
+    container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: symfony
@@ -46,12 +58,12 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
     environment:
-      PMA_HOST: mariadb # Nom du conteneur MariaDB
+      PMA_HOST: mysql # Nom du conteneur MySQL
       PMA_PORT: 3306    # Port interne utilisé par phpMyAdmin
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "8081:80" # Accès à phpMyAdmin via le port 8081
     depends_on:
-      - mariadb
+      - mysql
 volumes:
   db_data:
